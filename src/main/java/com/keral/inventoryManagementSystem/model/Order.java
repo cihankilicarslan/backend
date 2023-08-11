@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-//first commit cihan
+//first commit cihan test
 @Data
 @Table(name = "Orders")
 @Entity
