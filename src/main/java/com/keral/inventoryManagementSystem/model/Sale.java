@@ -1,10 +1,6 @@
 package com.keral.inventoryManagementSystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -18,9 +14,9 @@ public class Sale {
 	private String sales_id;
 
 	@Column(name = "Quantity_Sold")
-	// private String quantitySold;
+	private String quantitySold;
 
 	@OneToOne
+	@JoinColumn(name = "product_id") // This specifies the column name
 	private Product product;
-
 }

@@ -1,24 +1,28 @@
 package com.keral.inventoryManagementSystem.model;
 
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.persistence.*;
+
 @Data
-@EqualsAndHashCode(exclude = "product_id") 
-@ToString(exclude = "product_id") 
+@EqualsAndHashCode(exclude = "sale")
+@ToString(exclude = "sale")
 @Table(name = "Products")
 @Entity
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long product_id;
+	@Column(name = "Product_Id")
+	private long productId;
+
+	@OneToOne(mappedBy = "product")
+	private Sale sale;
 
 	@Column(name = "Product_Name")
-	private String product_name;
+	private String productName;
 
 	@Column(name = "Category")
 	private String category;
@@ -28,6 +32,4 @@ public class Product {
 
 	@Column(name = "Product_Price")
 	private double price;
-
-	
 }
