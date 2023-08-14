@@ -1,24 +1,40 @@
 package com.keral.inventoryManagementSystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
 
-import lombok.Data;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
-@Table(name = "User")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
-	
+
 	@Id
-	@Column(name = " User_ID")
-	private String user_id;
-	@Column(name = "User_Name")
-	private String user_name;
-	@Column(name = "Roles")
-	private String roles;
-	@Column(name = "Email_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(nullable = false)
+	private String firstName;
+
+	@Column(nullable = false)
+	private String lastName;
+
+	@Column(nullable = false, unique = true)
 	private String email;
+
+	@Column(nullable = false)
+	private String password;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "users_roles",
+			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+	)
+	private List<Role> roles = new ArrayList<>();
 }

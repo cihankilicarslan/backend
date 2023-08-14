@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <!-- head içeriği burada yer alabilir -->
+</head>
+<body>
+<!-- Navigasyon menüsü burada yer alabilir -->
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Add Product</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" role="form" th:action="@{/inventory/save}" th:object="${product}">
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input class="form-control"
+                               id="productName"
+                               name="productName"
+                               placeholder="Enter product name"
+                               th:field="*{productName}"
+                               type="text"
+                        />
+                        <!-- Hata mesajlarını ekle -->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Category</label>
+                        <input class="form-control"
+                               id="category"
+                               name="category"
+                               placeholder="Enter category"
+                               th:field="*{category}"
+                               type="text"
+                        />
+                        <!-- Hata mesajlarını ekle -->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input class="form-control"
+                               id="quantity"
+                               name="quantity"
+                               placeholder="Enter quantity"
+                               th:field="*{quantity}"
+                               type="number"
+                        />
+                        <!-- Hata mesajlarını ekle -->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Price</label>
+                        <input class="form-control"
+                               id="price"
+                               name="price"
+                               placeholder="Enter price"
+                               th:field="*{price}"
+                               type="number"
+                        />
+                        <!-- Hata mesajlarını ekle -->
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <button class="btn btn-primary" type="submit">Add Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

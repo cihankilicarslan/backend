@@ -1,0 +1,21 @@
+<div class="container mt-4">
+    <h1 class="text-center">Product List</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

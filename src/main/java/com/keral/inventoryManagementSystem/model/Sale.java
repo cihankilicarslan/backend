@@ -1,8 +1,12 @@
 package com.keral.inventoryManagementSystem.model;
 
-import javax.persistence.*;
+
+
 
 import lombok.Data;
+
+import javax.persistence.*;
+
 
 @Data
 @Table(name = "Sales")

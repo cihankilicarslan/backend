@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.keral.inventoryManagementSystem.model.User;
 
-public interface UserRepo extends JpaRepository<User, String>{
+public interface UserRepo extends JpaRepository<User, Long>{
 
+    User findByEmail(String email);
 }

@@ -1,10 +1,12 @@
 package com.keral.inventoryManagementSystem.model;
 
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+
 
 @Data
 @EqualsAndHashCode(exclude = "sale")
@@ -17,9 +19,6 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Product_Id")
 	private long productId;
-
-	@OneToOne(mappedBy = "product")
-	private Sale sale;
 
 	@Column(name = "Product_Name")
 	private String productName;

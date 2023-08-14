@@ -21,7 +21,7 @@ public class UserManagementService {
 	
 	public User save(User u) {
 		
-		System.out.println(u.getUser_id());
+		System.out.println(u.getId());
 
 		return userrepo.save(u);
 	}
