@@ -5,7 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-//first commit cihan test
+
 @Data
 @Table(name = "Orders")
 @Entity

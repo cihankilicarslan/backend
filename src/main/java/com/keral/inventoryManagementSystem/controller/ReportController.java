@@ -30,8 +30,8 @@ public class ReportController {
             response.setHeader("Content-Disposition", "inline; filename=report.pdf");
             response.getOutputStream().write(reportBytes);
         } catch (IOException | JRException | SQLException e) {
-            // Handle the exceptions here
-            e.printStackTrace(); // You might want to log the exception or return an error response
+
+            e.printStackTrace();
         }
     }
 }
