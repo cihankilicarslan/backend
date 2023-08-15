@@ -1,6 +1,7 @@
 package com.keral.inventoryManagementSystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,15 @@ public class InventoryManagementService {
 	}
 
 	public List<Product> getAllProducts() {
-		return repo.findAll(); // Tüm ürünleri çekmek için JpaRepository'nin sağladığı metodu kullanıyoruz.
+		return repo.findAll();
+	}
+
+	public Product getProductById(Long id) {
+		Optional<Product> productOptional = repo.findById(id);
+		return productOptional.orElse(null);
+	}
+
+	public void deleteProduct(Long id) {
+		repo.deleteById(id);
 	}
 }

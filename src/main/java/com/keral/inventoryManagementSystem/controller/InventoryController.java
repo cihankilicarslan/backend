@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.keral.inventoryManagementSystem.model.Product;
 import com.keral.inventoryManagementSystem.service.InventoryManagementService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -18,12 +19,18 @@ public class InventoryController {
 	@Autowired
 	private InventoryManagementService inService;
 
-	@PostMapping("/save")
-	public ResponseEntity<Product> addProduct(@RequestBody Product p) {
+	/*@PostMapping(value = "/save")
+	public ResponseEntity<Product> addProduct(@ModelAttribute Product p) {
 		Product savedProduct = inService.save(p);
 		return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
-	}
+	}*/
+	@PostMapping("/save")
+	public String addProduct(@ModelAttribute Product p, Model model, RedirectAttributes redirectAttributes) {
+		Product savedProduct = inService.save(p);
+		redirectAttributes.addFlashAttribute("message", "Product added successfully!");
 
+		return "redirect:/inventory/products";
+	}
 
 
 	@GetMapping("/products")
@@ -32,6 +39,33 @@ public class InventoryController {
 		model.addAttribute("products", products);
 		return "products";
 	}
+	@GetMapping("/update/{id}")
+	public String showUpdateForm(@PathVariable Long id, Model model) {
+		Product product = inService.getProductById(id);
+		model.addAttribute("product", product);
+		return  "redirect:/inventory/products"; // Güncelleme formunu gösteren view sayfasına yönlendirilir
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateProduct(@PathVariable Long id, @ModelAttribute Product updatedProduct) {
+		Product existingProduct = inService.getProductById(id);
+		if (existingProduct != null) {
+			existingProduct.setProductName(updatedProduct.getProductName());
+			existingProduct.setCategory(updatedProduct.getCategory());
+			existingProduct.setQuantity(updatedProduct.getQuantity());
+			existingProduct.setPrice(updatedProduct.getPrice());
+			inService.save(existingProduct);
+		}
+		return "redirect:/inventory/products";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable Long id) {
+		inService.deleteProduct(id);
+		return "redirect:/inventory/products";
+	}
+
+
 	@GetMapping("/")
 	public ResponseEntity<String> getInventoryHome() {
 		return new ResponseEntity<>("Welcome to Inventory!", HttpStatus.OK);

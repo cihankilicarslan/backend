@@ -3,6 +3,7 @@ package com.keral.inventoryManagementSystem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,7 +35,11 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/UserApi/users").hasRole("ADMIN")
                                 .antMatchers("/inventory/products").hasRole("ADMIN")
                                 .antMatchers("/reports/generate").hasRole("ADMIN")
-                                .antMatchers("/inventory/save").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST,"/inventory/save").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/inventory/update/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/inventory/delete/**").hasRole("ADMIN")
+
+
 
 
 
