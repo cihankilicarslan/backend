@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- head kısmı -->
+</head>
+<body>
+<!-- navbar ve diğer başlık alanları -->
+
+<div class="container mt-4">
+    <h1 class="text-center mt-4">Sales List</h1>
+    <button id="add-button" class="btn btn-primary">Add Sale</button>
+
+    <!-- Sale Listesi Tablosu -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Sale ID</th>
+            <th>Quantity Sold</th>
+            <th>Product</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sale : ${sales}">
+            <td th:text="${sale.salesId}"></td>
+            <td th:text="${sale.quantitySold}"></td>
+            <td th:if="${sale.product != null}" th:text="${sale.product.productName}">N/A</td>
+
+            <a th:href="@{/sales/update/{id}(id=${sale.salesId})}" class="btn btn-info btn-sm">Edit</a>
+                <a th:href="@{/sales/delete/{id}(id=${sale.salesId})}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- diğer içerikler ve footer -->
+
+</body>
+</html>

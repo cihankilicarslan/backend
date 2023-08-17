@@ -4,23 +4,29 @@ package com.keral.inventoryManagementSystem.model;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 
 @Data
+@EqualsAndHashCode(exclude = "product")
+@ToString(exclude = "product")
 @Table(name = "Sales")
 @Entity
 public class Sale {
 
+
 	@Id
-	@Column(name = "Sales_ID")
-	private String sales_id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "Sale_ID")
+	private Long salesId;
 
 	@Column(name = "Quantity_Sold")
-	private String quantitySold;
+	private int quantitySold;
 
-	@OneToOne
-	@JoinColumn(name = "product_id") // This specifies the column name
+	@ManyToOne
+	@JoinColumn(name = "product_id")
 	private Product product;
 }

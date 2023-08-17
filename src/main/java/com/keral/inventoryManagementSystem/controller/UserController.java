@@ -72,7 +72,7 @@ public class UserController {
 		return "index";
 	}
 
-	@GetMapping("/logout-success")
+	@GetMapping("/logout")
 	public String logoutSuccess() {
 		return "redirect:/UserApi/index";
 	}

@@ -35,10 +35,12 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/UserApi/users").hasRole("ADMIN")
                                 .antMatchers("/inventory/products").hasRole("ADMIN")
                                 .antMatchers("/reports/generate").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST,"/sales/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST,"sales/delete/").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.POST,"/inventory/save").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.POST, "/inventory/update/**").hasRole("ADMIN")
+                                 .antMatchers(HttpMethod.POST, "/inventory/update.html/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.POST, "/inventory/delete/**").hasRole("ADMIN")
-
+                               .antMatchers(HttpMethod.POST, "/inventory/api/products/save").hasRole("ADMIN")
 
 
 

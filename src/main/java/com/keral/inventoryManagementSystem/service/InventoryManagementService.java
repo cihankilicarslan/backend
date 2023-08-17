@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.keral.inventoryManagementSystem.model.Product;
+import com.keral.inventoryManagementSystem.model.Product; // Doğru paket adını kullanın
 import com.keral.inventoryManagementSystem.repository.InventoryRepo;
 
 @Service

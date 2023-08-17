@@ -26,10 +26,10 @@
                 <li class="nav-item" th:if="${#authentication.authenticated}">
                     <a class="nav-link active" aria-current="page" th:href="@{/UserApi/logout}">Logout</a>
                 </li>
-
-
+                <li class="nav-item" th:if="${#authentication.authenticated}">
+                    <a class="nav-link active" aria-current="page" th:href="@{/sales}">Sales</a>
+                </li>
             </ul>
-
         </div>
     </div>
 </nav>
@@ -49,7 +49,7 @@
 
 <div class="container mt-4">
     <h1 class="text-center mt-4">Product List</h1>
-    <span> <a href="/reports/generate">Take Report</a></span>
+    <span><a href="/reports/generate">Take Report</a></span>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Product List</h2>
@@ -73,13 +73,16 @@
             <td th:text="${product.category}"></td>
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.price}"></td>
-            <td><a href="javascript:void(0);" class="toggle-form" data-product-id="${product.productId}" data-action="update">Update</a></td>
-            <td><a th:href="@{/inventory/delete/{id}(id=${product.productId})}">Delete</a></td>
+            <td>
+                <a href="javascript:void(0);" class="toggle-form" data-product-id="${product.productId}" data-action="update">Update</a>
+            </td>
+            <td>
+                <a th:href="@{/inventory/delete/{id}(id=${product.productId})}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
 
-    <!-- update-forms ve add-form içindeki input alanlarını düzeltin -->
     <div id="update-forms">
         <div th:each="product : ${products}">
             <form class="update-form" data-product-id="${product.productId}" style="display: none;"
@@ -135,12 +138,11 @@
                 const productId = this.getAttribute("data-product-id");
                 const updateForm = document.querySelector(`.update-form[data-product-id="${productId}"]`);
 
-                // Toggle form visibility
                 updateForms.forEach(function (form) {
                     form.style.display = "none";
                 });
 
-                addForm.style.display = "none"; // Hide the add form
+                addForm.style.display = "none";
 
                 if (action === "update") {
                     updateForm.style.display = "block";
