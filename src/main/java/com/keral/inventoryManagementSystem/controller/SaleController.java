@@ -61,6 +61,9 @@ public class SaleController {
         model.addAttribute("sale", sale);
         return "sales/details"; // Assuming you have a Thymeleaf template named "details.html" for displaying sale details
     }
+
+
+
     @GetMapping("/update/{id}")
     public String updateSaleForm(@PathVariable Long id, Model model) {
         Sale sale = saleService.getSaleById(id);

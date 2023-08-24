@@ -43,7 +43,7 @@ public class InventoryController {
 	public String showUpdateForm(@PathVariable Long id, Model model) {
 		Product product = inService.getProductById(id);
 		model.addAttribute("product", product);
-		return  "redirect:/inventory/products"; // Güncelleme formunu gösteren view sayfasına yönlendirilir
+		return  "update";
 	}
 
 	@PostMapping("/update/{id}")

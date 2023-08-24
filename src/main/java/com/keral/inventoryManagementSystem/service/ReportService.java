@@ -24,6 +24,23 @@ public class ReportService {
 
     public byte[] generateReport() throws JRException, SQLException {
         try (Connection connection = dataSource.getConnection()) {
+            InputStream jasperStream = resourceLoader.getResource("classpath:products_report.jrxml").getInputStream();
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperStream);
+
+            Map<String, Object> parameters = new HashMap<>();
+            // Add parameters if needed
+            // parameters.put("paramName", paramValue);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public byte[] generateReportSale() throws JRException, SQLException {
+        try (Connection connection = dataSource.getConnection()) {
             InputStream jasperStream = resourceLoader.getResource("classpath:sales_report.jrxml").getInputStream();
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperStream);
 
@@ -38,4 +55,6 @@ public class ReportService {
             throw new RuntimeException(e);
         }
     }
+
+
 }

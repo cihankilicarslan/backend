@@ -28,8 +28,12 @@
                 </li>
                 <li class="nav-item" th:if="${#authentication.authenticated}">
                     <a class="nav-link active" aria-current="page" th:href="@{/sales}">Sales</a>
+
                 </li>
+
+
             </ul>
+
         </div>
     </div>
 </nav>
@@ -49,7 +53,7 @@
 
 <div class="container mt-4">
     <h1 class="text-center mt-4">Product List</h1>
-    <span><a href="/reports/generate">Take Report</a></span>
+    <span> <a href="/reports/generate">Take Report</a></span>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Product List</h2>
@@ -69,40 +73,19 @@
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
+
             <td th:text="${product.productName}"></td>
             <td th:text="${product.category}"></td>
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.price}"></td>
-            <td>
-                <a href="javascript:void(0);" class="toggle-form" data-product-id="${product.productId}" data-action="update">Update</a>
-            </td>
-            <td>
-                <a th:href="@{/inventory/delete/{id}(id=${product.productId})}">Delete</a>
-            </td>
+            <td><a th:href="@{/inventory/update/{id}(id=${product.productId})}">Update</a></td>
+            <td><a th:href="@{/inventory/delete/{id}(id=${product.productId})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
 
-    <div id="update-forms">
-        <div th:each="product : ${products}">
-            <form class="update-form" data-product-id="${product.productId}" style="display: none;"
-                  th:action="@{/inventory/update/{id}(id=${product.productId})}" method="post">
-                <label for="productName">Product Name</label>
-                <input type="text" id="productName" name="productName" th:value="${product.productName}" class="form-control" required>
+    <!-- update.html-forms ve add-form içindeki input alanlarını düzeltin -->
 
-                <label for="category">Category</label>
-                <input type="text" id="category" name="category" th:value="${product.category}" class="form-control" required>
-
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" th:value="${product.quantity}" class="form-control" required>
-
-                <label for="price">Price</label>
-                <input type="number" id="price" name="price" th:value="${product.price}" class="form-control" required>
-
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
-    </div>
 
     <div id="add-form" style="display: none;">
         <form id="product-form" th:action="@{/inventory/save}" method="post">
@@ -125,39 +108,18 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleLinks = document.querySelectorAll(".toggle-form");
-        const updateForms = document.querySelectorAll(".update-form");
-        const addButton = document.getElementById("add-button");
-        const addForm = document.getElementById("add-form");
 
-        toggleLinks.forEach(function (link) {
-            link.addEventListener("click", function (event) {
+        document.addEventListener("DOMContentLoaded", function () {
+            const addButton = document.getElementById("add-button");
+            const addForm = document.getElementById("add-form");
+
+            addButton.addEventListener("click", function (event) {
                 event.preventDefault();
-                const action = this.getAttribute("data-action");
-                const productId = this.getAttribute("data-product-id");
-                const updateForm = document.querySelector(`.update-form[data-product-id="${productId}"]`);
-
-                updateForms.forEach(function (form) {
-                    form.style.display = "none";
-                });
-
-                addForm.style.display = "none";
-
-                if (action === "update") {
-                    updateForm.style.display = "block";
-                }
+                addForm.style.display = "block";
             });
         });
 
-        addButton.addEventListener("click", function (event) {
-            event.preventDefault();
-            updateForms.forEach(function (form) {
-                form.style.display = "none";
-            });
-            addForm.style.display = "block";
-        });
-    });
+
 </script>
 </body>
 </html>

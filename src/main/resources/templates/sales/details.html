@@ -3,13 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Sale Details</title>
-  <!-- CSS ve diğer gerekli bağlantılar -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
 </head>
 <body>
-<h1>Sale Details</h1>
-<div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Navbar içeriği -->
+</nav>
 
+<div class="container mt-4">
+  <h1 class="text-center mt-4">Sale Details</h1>
+
+  <div>
+    <p><strong>Sale ID:</strong> <span th:text="${sale.salesId}"></span></p>
+    <p><strong>Quantity Sold:</strong> <span th:text="${sale.quantitySold}"></span></p>
+
+    <p><strong>Product Name:</strong> <span th:if="${sale.product != null}" th:text="${sale.product.productName}">N/A</span></p>
+    <p><strong>Product Category:</strong> <span th:if="${sale.product != null}" th:text="${sale.product.category}">N/A</span></p>
+    <!-- Diğer sale ayrıntıları buraya eklenebilir -->
+  </div>
+
+  <a th:href="@{/sales}">Back to Sales List</a>
 </div>
-<!-- Diğer içerikler ve bağlantılar -->
+
 </body>
 </html>

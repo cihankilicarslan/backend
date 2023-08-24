@@ -34,4 +34,17 @@ public class ReportController {
             e.printStackTrace();
         }
     }
+
+    @GetMapping(value = "/generate-sales", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void generateSalesReport(HttpServletResponse response) {
+        try {
+            byte[] reportBytes = reportService.generateReportSale();
+
+            response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+            response.setHeader("Content-Disposition", "inline; filename=sales_report.pdf");
+            response.getOutputStream().write(reportBytes);
+        } catch (IOException | JRException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
